@@ -14,3 +14,8 @@ docker-compose config \
 docker-compose build \
 docker-compose up -d
 
+docker-mariadb      latest                a8d8b1b71f4c        5 minutes ago       230MB \
+docker-phpfpm       latest                b48230d70ea2        6 minutes ago       125MB \
+docker-nginx        latest                cda48f3eff6f        6 minutes ago       20.1MB
+
+
