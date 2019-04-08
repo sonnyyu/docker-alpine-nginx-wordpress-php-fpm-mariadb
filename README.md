@@ -1,1 +1,3 @@
-# docker-alpine-nginx-wordpress-php-fpm-mysql
+# docker-nginx-phpfpm-alpine
+
+Basic Docker setup for running Nginx + PHP-FPM on Alpine Linux.

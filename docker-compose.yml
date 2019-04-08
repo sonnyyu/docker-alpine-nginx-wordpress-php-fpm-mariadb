@@ -1,0 +1,57 @@
+version: "3.7"
+services:
+  docker-nginx:
+    image: docker-nginx
+    hostname: docker-nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: docker-nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - srv_www:/srv/www
+      #- ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - www
+  docker-phpfpm:
+    image: docker-phpfpm
+    hostname: docker-phpfpm
+    build:
+      context: ./phpfpm
+      dockerfile: Dockerfile
+    container_name: docker-phpfpm
+    restart: always
+    volumes:
+      - srv_www:/srv/www
+    networks:
+      - www
+  docker-mariadb:
+    image: docker-mariadb
+    hostname: docker-mariadb
+    build:
+      context: ./mariadb
+      dockerfile: Dockerfile
+    container_name: docker-mariadb
+    environment:
+      MYSQL_DATABASE: wordpressdb
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: user
+      # You can use whatever password you like
+      MYSQL_PASSWORD: password
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: password
+    #ports:
+    #  - 3036:3036
+    restart: always
+    volumes:
+      - var_log_mysql:/var/log/mysql
+    networks:
+      - www
+networks:
+  www:
+volumes:
+  var_log_mysql:
+  srv_www:
+
